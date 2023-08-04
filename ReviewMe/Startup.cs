@@ -35,6 +35,7 @@ namespace ReviewMe
             services.InjectRepositories();
             services.InjectServices();
             services.AddSwaggerGen();
+            services.AddCors();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -52,6 +53,11 @@ namespace ReviewMe
             app.UseRouting();
 
             app.UseAuthorization();
+            app.UseCors(o =>
+                o.AllowAnyOrigin()
+                 .AllowAnyMethod()
+                 .AllowAnyHeader()
+            );
 
             app.UseEndpoints(endpoints =>
             {

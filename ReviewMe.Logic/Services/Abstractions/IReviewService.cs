@@ -9,7 +9,7 @@ namespace ReviewMe.Logic.Services.Abstractions
     public interface IReviewService
     {
         Task<Review> AddReview(Review review);
-        Task<IEnumerable<Review>> GetAllReviews();
+        Task<EntitySet<Review>> GetReviews(int? page, int? limit);
         Task DeleteReview(Guid id);
     }
 }

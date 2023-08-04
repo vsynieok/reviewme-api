@@ -27,9 +27,9 @@ namespace ReviewMe.Logic.Services
             await _reviews.Delete(id);
         }
 
-        public async Task<IEnumerable<Review>> GetAllReviews()
+        public async Task<EntitySet<Review>> GetReviews(int? page, int? limit)
         {
-            return await _reviews.ReadAll();
+            return await _reviews.ReadWithPagination(page, limit);
         }
     }
 }

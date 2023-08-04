@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace ReviewMe.API.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/reviews")]
     [ApiController]
     public class ReviewsController : ControllerBase
     {
@@ -18,15 +18,15 @@ namespace ReviewMe.API.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> GetReviews()
+        public async Task<IActionResult> GetReviews([FromQuery] int? page, [FromQuery] int? limit)
         {
             try
             {
-                return Ok(await _reviewService.GetAllReviews()); 
+                return Ok(await _reviewService.GetReviews(page, limit));
             }
             catch
             {
-                return BadRequest();
+                return StatusCode(500);
             }
         }
 
@@ -38,9 +38,13 @@ namespace ReviewMe.API.Controllers
                 await _reviewService.DeleteReview(id);
                 return Ok();
             }
+            catch (InvalidOperationException)
+            {
+                return NotFound();
+            }
             catch
             {
-                return BadRequest();
+                return StatusCode(500);
             }
         }
 
@@ -53,7 +57,7 @@ namespace ReviewMe.API.Controllers
             }
             catch
             {
-                return BadRequest();
+                return StatusCode(500);
             }
         }
     }
