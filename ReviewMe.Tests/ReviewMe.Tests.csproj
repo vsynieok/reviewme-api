@@ -1,0 +1,20 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.6.3" />
+    <PackageReference Include="Moq" Version="4.18.4" />
+    <PackageReference Include="NUnit" Version="3.13.3" />
+    <PackageReference Include="NUnit3TestAdapter" Version="4.5.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\ReviewMe.Data\ReviewMe.Data.csproj" />
+    <ProjectReference Include="..\ReviewMe.Logic\ReviewMe.Logic.csproj" />
+    <ProjectReference Include="..\ReviewMe\ReviewMe.API.csproj" />
+  </ItemGroup>
+
+</Project>
