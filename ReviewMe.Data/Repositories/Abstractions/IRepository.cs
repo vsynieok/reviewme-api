@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ReviewMe.Data.Models;
+using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
@@ -9,7 +10,7 @@ namespace ReviewMe.Data.Repositories.Abstractions
     {
         Task<T> Create(T entity);
         Task<T> Read(Guid id);
-        Task<IEnumerable<T>> ReadAll();
+        Task<EntitySet<T>> ReadWithPagination(int? page, int? limit);
         Task Delete(Guid id);
     }
 }

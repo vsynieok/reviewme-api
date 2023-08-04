@@ -15,6 +15,7 @@ namespace ReviewMe.Data
             {
                 e.HasKey(r => r.Id);
                 e.Property(r => r.Id).ValueGeneratedOnAdd();
+                e.Property(r => r.LastModified).HasDefaultValueSql("getutcdate()");
             });
         }
     }

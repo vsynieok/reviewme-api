@@ -9,6 +9,7 @@ namespace ReviewMe.Data.Models
     {
         public Guid? Id { get; set; }
         [Required]
+        [MaxLength(255)]
         public string Name { get; set; }
         [Required]
         [Range(0, 5)]
@@ -16,5 +17,6 @@ namespace ReviewMe.Data.Models
         [Required]
         [MaxLength(255)]
         public string Comment { get; set; }
+        public DateTime? LastModified { get; set; }
     }
 }

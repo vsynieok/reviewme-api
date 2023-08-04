@@ -33,15 +33,26 @@ namespace ReviewMe.Data.Repositories
         public async Task Delete(Guid id)
         {
             var entityToDelete = await this.Read(id);
+            if (entityToDelete == null) throw new InvalidOperationException();
             _storageContext.Reviews.Remove(entityToDelete);
             await _storageContext.SaveChangesAsync();
             return;
         }
 
 
-        public async Task<IEnumerable<Review>> ReadAll()
+        public async Task<EntitySet<Review>> ReadWithPagination(int? page, int? limit)
         {
-            return await _storageContext.Reviews.ToListAsync();
+            IEnumerable<Review> result;
+
+            if (page == null || limit == null)
+            {
+                result = await _storageContext.Reviews.OrderByDescending(x => x.LastModified).ToListAsync();
+                return new EntitySet<Review> { Items = result, Page = 1, TotalPages = 1 };
+            }
+
+            result = await _storageContext.Reviews.OrderByDescending(x => x.LastModified).Skip(((page ?? 1) - 1) * limit ?? 1).Take(limit ?? 1).ToListAsync();
+            var pageCount = Convert.ToInt32(Math.Ceiling((await _storageContext.Reviews.CountAsync()) / (decimal)limit));
+            return new EntitySet<Review> { Items = result, Page = page ?? 1, TotalPages = pageCount };
         }
     }
 }
