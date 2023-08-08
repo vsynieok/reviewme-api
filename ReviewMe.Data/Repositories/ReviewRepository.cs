@@ -52,7 +52,7 @@ namespace ReviewMe.Data.Repositories
 
             result = await _storageContext.Reviews.OrderByDescending(x => x.LastModified).Skip(((page ?? 1) - 1) * limit ?? 1).Take(limit ?? 1).ToListAsync();
             var pageCount = Convert.ToInt32(Math.Ceiling((await _storageContext.Reviews.CountAsync()) / (decimal)limit));
-            return new EntitySet<Review> { Items = result, Page = page ?? 1, TotalPages = pageCount };
+            return new EntitySet<Review> { Items = result, Page = page ?? 1, TotalPages = pageCount == 0 ? 1 : pageCount };
         }
     }
 }
