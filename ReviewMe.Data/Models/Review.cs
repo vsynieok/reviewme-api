@@ -9,7 +9,7 @@ namespace ReviewMe.Data.Models
     {
         public Guid? Id { get; set; }
         [Required]
-        [MaxLength(255)]
+        [MaxLength(50)]
         public string Name { get; set; }
         [Required]
         [Range(0, 5)]
