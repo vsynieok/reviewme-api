@@ -48,16 +48,14 @@ namespace ReviewMe
                 app.UseSwaggerUI();
             }
 
+            app.ApplyMigrations();
+
             app.UseHttpsRedirection();
-
             app.UseRouting();
-
-            app.UseAuthorization();
             app.UseCors(o =>
                 o.AllowAnyOrigin()
                  .AllowAnyMethod()
-                 .AllowAnyHeader()
-            );
+                 .AllowAnyHeader());
 
             app.UseEndpoints(endpoints =>
             {
